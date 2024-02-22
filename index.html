@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="last-lesson.js" defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap')
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!--    <script src="index.js" defer></script>-->
+    <link rel="stylesheet" href="project.css">
+<!--    <link rel="stylesheet" href="index.css">-->
+    <title>Запросы</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body>
+<!--<input type="text" id="input">-->
+<!--<button id="clicker">Click me</button>-->
+
+<span id="number"></span>
+<button id="increment">+</button>
+
+
+
+<div class="form">
+    <div class="form__head">
+        <input type="text" class="form__name" placeholder="Название">
+        <button>Создать</button>
+    </div>
+
+    <div class="form__status">
+        <input type="radio" name="status" class="form__radio" id="active" placeholder="Название">
+        <label for="active">Active</label>
+        <input type="radio" name="status" class="form__radio" id="finished" placeholder="Название">
+        <label for="finished">Finished</label>
+        <input type="radio" name="status" class="form__radio" id="hold" placeholder="Название">
+        <label for="hold">On Hold</label>
+        <input type="radio" name="status" class="form__radio" id="canceled" placeholder="Название">
+        <label for="canceled">Canceled</label>
+    </div>
+</div>
+
+<div class="todo-list">
+    <div class="todo-col todo-col--active">
+        <h3>Active</h3>
+        <div class="todo-items"></div>
+    </div>
+    <div class="todo-col todo-col--hold">
+        <h3>On Hold</h3>
+        <div class="todo-items"></div>
+    </div>
+    <div class="todo-col todo-col--finished">
+        <h3>Finished</h3>
+        <div class="todo-items"></div>
+    </div>
+    <div class="todo-col todo-col--canceled">
+        <h3>Canceled</h3>
+        <div class="todo-items"></div>
+    </div>
+</div>
+
+<!--<input type="text" placeholder="Поиск по названию">-->
+<!--<button id="btn">Поиск</button>-->
+
+<!--<ul class="posts"></ul>-->
+
+<!--<header>-->
+<!--    <nav>-->
+<!--        <ul>-->
+<!--            <li><a href="#about">О нас</a></li>-->
+<!--            <li><a href="#menu">Меню</a></li>-->
+<!--            <li><a href="#specials">Специальные предложения</a></li>-->
+<!--            <li><a href="#contact">Контакты</a></li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</header>-->
+
+<!--    <video class="intro" src="https://static.vecteezy.com/system/resources/previews/007/171/359/mp4/masses-of-freshly-roasted-coffee-beans-rise-from-the-bottom-coffee-beans-spread-in-the-air-3d-rendering-free-video.mp4" autoplay loop muted></video>-->
+
+<!--<section id="welcome">-->
+<!--    <h1>It's not just a coffee</h1>-->
+<!--    <p>It's a cup of pleasure</p>-->
+<!--</section>-->
+
+<!--<div class="cools">-->
+<!--    <div class="cool">-->
+<!--        <svg fill="#ffffff" width="100px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 549.818 549.819" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M543.221,295.752c-7.3-17.101-23.899-36.101-44.699-34.3c-19,1.8-30,19-35.5,36.7c-2.4-12.899-6.7-25.1-12.9-36.1 c-3.1-4.9-8.6-6.1-13.5-4.3c-0.6-4.3-3.7-8-8-8.6c-58-9.1-121,0.7-179.799,3.7c-66.7,3.7-134,4.3-200.7,6.7c-6.7,0-9.8,8-7.3,12.9 c-0.6,0.6-0.6,1.8-0.6,3.1c-5.5,58.8,12.9,107.7,45.3,144.399c-20.2,0.601-88.1,14.7-57.5,49.601c34.3,38.6,102.2,49,150.6,53.2 c93,8,288.299,38.6,340.299-67.301c2.4-5.5,1.8-14.1-4.3-16.5c-26.9-11.6-53.9-17.699-82-18.399c4.9-6.101,9.2-12.2,12.9-19.601 c34.3,0.601,71-6.1,92.399-34.899C552.421,345.852,553.021,317.152,543.221,295.752z M253.722,503.152 c-36.7-1.2-74.7-3.1-110.8-9.2c-19.6-3.699-38.6-9.8-57.5-16.5c-13.5-4.899-26.9-11.6-37.9-20.199c-11.6-9.2,34.9-23.9,39.2-25.7 c2.4-1.2,3.7-3.101,4.3-5.5c45.9,47.1,115.7,72.2,189.1,67.3c46.5-3.1,92.4-19.6,127.9-49.6c28.199-2.4,55.1,0.6,82,10.399 C444.721,517.252,320.421,506.252,253.722,503.152z M403.121,411.352c-3.1,3.7-6.7,6.7-10.4,9.8c-0.6,0-0.6,0-1.199,0 c-5.5,0.601-8,4.3-8.601,8c-31.2,23.9-72.8,34.9-110.799,37.3c-120.6,8.601-206.2-73.399-216-189.7c57.5,7.301,116.3,5.5,173.8,3.7 c64.9-1.8,134.6,1.2,198.299-9.2c0.601,0,0.601,0,1.2-0.6C431.221,324.452,442.821,366.052,403.121,411.352z M518.121,352.652 c-14.7,18.4-39.8,23.3-63,23.9c4.9-13.5,8-28.2,9.2-42.8c1.8-0.601,3.7-1.801,4.3-4.301c3.7-12.899,7.3-26.3,15.3-37.3 c1.8-3.1,4.9-6.1,7.3-8c3.101-1.8,5.5-2.4,7.301-3.1c4.899,0,9.199,2.399,13.5,6.1c4.899,4.9,9.199,11.601,11,18.4 C528.521,321.452,529.121,338.552,518.121,352.652z"></path> <path d="M55.421,211.852c-11-33-3.1-62.4-2.4-96.1c0.6-24.5-15.9-50.8-41-54.5c-9.8-1.8-15.9,8.6-9.2,16.5 c8.6,10.4,19.6,15.9,23.9,30c3.7,12.2,0.6,27.5,0,39.8c-1.8,25.1,1.2,49,14.1,71C45.021,226.552,58.521,221.052,55.421,211.852z"></path> <path d="M120.921,54.552c-10.4-6.7-20.2,8-12.9,16.5c13.5,15.3,24.5,26.9,20.8,48.3c-2.4,12.2-7.3,23.9-11.6,35.5 c-8.6,25.1-7.3,48.3,7.3,71c4.9,7.3,15.9,1.2,12.2-6.7c-15.9-35.5,8.6-64.9,15.9-98.5 C157.622,92.552,143.021,68.052,120.921,54.552z"></path> <path d="M236.622,32.552c-9.2-8.6-25.1,2.4-17.7,13.5c29.4,45.3-12.2,127.3-26.3,173.8c-1.8,6.7,7.3,10.4,11,4.9 c17.7-26.9,29.4-56.3,38.6-87.5C251.322,107.852,263.521,57.052,236.622,32.552z"></path> <path d="M351.021,25.852c0-11-14.7-12.2-18.4-2.4c-14.1,37.9-19,72.2-52,100.4c-4.899,4.3-3.7,11.6,0,15.9 c11.6,14.7,30,37.3,13.5,57.5c-6.7,8-20.2,9.2-29.399,12.2c-4.9,1.8-6.1,9.8,0,11c16.499,3.1,38.6-1.2,48.999-16.5 c15.9-24.5,5.5-49-9.8-70.4C332.721,105.952,351.021,64.952,351.021,25.852z"></path> <path d="M448.321,33.752c-30.601,33-34.3,75.3-86.9,86.9c-6.7,1.2-10.399,10.4-6.7,16.5c18.4,26.9,36.7,52.6-1.199,71.6 c-6.7,3.7-1.801,14.1,4.899,12.2c50.2-13.5,42.2-47.7,22.601-82.6c39.8-14.1,75.899-54.5,82.6-94.9 C466.121,34.352,455.721,25.852,448.321,33.752z"></path> </g> </g></svg>        <h3>Awesome Aroma</h3>-->
+<!--        <p>The coffee is brewed by first roasting the green coffee beans</p>-->
+<!--    </div>-->
+<!--    <div class="cool">-->
+<!--        <svg fill="#ffffff" width="100px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 536.243 536.242" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M471.053,197.07c-94.2-101.601-284-183.601-423.5-154.2c-9.2,1.8-12.9,9.2-12.2,16.5c-86.9,47.7,9.2,213,45.9,261.3 c72.2,96.1,200.701,203.2,329.901,173.8c60-13.5,103.399-69.8,120-126.1C550.053,304.77,513.253,242.37,471.053,197.07z M393.353,465.17c-102.199,23.3-210.5-75.9-271.7-145c-61.2-70.4-108.3-155.4-71-243c83.8,151.8,253.4,269.3,414.9,321.899 c19.601,6.101,28.2-24.5,8.601-31.199C318.753,315.27,166.353,209.97,73.953,72.27c111.4-13.5,238.701,45.9,326.201,107.101 c50.199,35.5,98.5,87.5,102.8,151.8C505.954,394.17,451.454,451.67,393.353,465.17z"></path> </g> </g></svg>        <h3>High Quality</h3>-->
+<!--        <p>The coffee is brewed by first roasting the green coffee beans</p>-->
+<!--    </div>-->
+<!--    <div class="cool">-->
+<!--        <svg fill="#ffffff" width="100px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 563.385 563.385" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M402.701,178.499c6.1-28.2,9.8-56.3,8-82.6c-0.6-6.1-4.9-9.8-9.2-9.8c-1.8-4.9-8-7.3-13.5-3.1 c-48.3,40.4-112.6,57.5-175,56.9c-36.7-0.6-76.5-12.9-99.1-43.5c-13.5-18.4-17.1-39.8,3.1-54.5c54.5-39.8,181.8-27.5,238.101,16.5 c-44.101,18.4-96.701,28.2-143.201,28.8c-14.1,0-37.9-0.6-44.1-16.5c-9.2-23.3,44.1-20.2,53.2-20.2c27.5,1.2,55.7,6.1,82,14.1 c12.9,3.7,18.4-16.5,5.5-20.2c-30-8.6-211.1-36.7-156.1,44.7c37.3,55.1,181.8,3.1,226.4-17.7c6.7-3.1,6.101-11.6,1.801-16.5 c-37.9-42.8-105.901-52-159.701-54.5c-41.6-1.8-120.6,0.6-139.5,48.3c-22,57.5,48.3,101.6,94.2,112 c64.3,15.3,158.501-1.8,209.9-49.6c-6.1,25.1-8.6,52-14.1,77.1c-8.601,43.5-17.101,87.5-25.101,131.6 c-11,64.301-23.3,137.1-9.199,202.6h-0.601c-77.7,14.1-149.3,22.6-224-11c-0.6-0.6-1.8-0.6-2.4-0.6c-3.1-30-11-60-14.7-90 c-4.9-37.9-6.7-75.9-9.2-113.801c-3.7-74.699-3.1-149.299-11-223.399c-1.2-9.8-15.3-10.4-15.3,0c-1.2,80.2-0.6,160.3,3.1,239.899 c2.4,64.301,1.2,148.102,30.6,206.9c3.7,7.301,14.1,5.5,17.1-1.199c66.1,35.5,167.7,49.6,234.401,11.6 c1.8-0.6,2.399-1.801,3.699-3.1c2.4-0.6,4.301-2.4,4.301-5.5c-2.4-47.701,1.199-94.9,7.3-141.4c71.6,22,132.8-22.6,142.6-97.9 C511.001,225.099,472.501,161.399,402.701,178.499z M374.602,297.898c3.1-17.1,7.3-34.9,12.199-52.6c11-10.4,25.101-20.8,39.2-14.1 c13.5,6.7,17.101,26.9,18.4,40.4c1.2,18.399-3.7,38.601-15.3,53.2c-15.9,19.6-39.801,22.6-62.4,19.6 C369.001,329.1,371.501,313.799,374.602,297.898z M484.102,286.299c-5.5,66.699-59.4,105.9-122.4,91.199 c0.6-4.299,1.2-8,1.8-12.199c60.601,8.6,106.5-36.699,99.101-99.1c-2.4-19.6-11.601-44.1-31.801-51.4c-14.1-4.9-27.5,0-38.6,9.2 c1.8-8,4.3-15.9,6.1-23.9C459.602,181.599,489.001,228.699,484.102,286.299z"></path> <path d="M263.801,234.199c-33-25.1-83.8-28.2-115.7-0.6c-1.8,0-3.7,1.2-4.3,3.7c0,0,0,0,0,0.6c-0.6,0.6-0.6,0.6-1.2,1.2 c-3.7,3.7-3.7,8-1.2,11c-6.1,37.899,15.9,78.3,44.7,101.601c37.3,30,77.7,19,104.7-17.1 C315.801,299.1,294.401,257.499,263.801,234.199z M245.401,245.299c26.3,14.1,43.5,41.6,33,69.801 c-38.6-20.801-74.1-43.501-107.1-72.801C194.601,230.599,220.301,232.399,245.401,245.299z M189.701,331.498 c-22.6-19-37.3-48.299-36.7-78.299c0.6-0.6,1.8-0.6,2.4-1.2c0.6-0.6,0.6-0.6,1.2-1.2c31.2,33,69.2,61.199,110.2,82 C245.401,357.898,214.801,352.998,189.701,331.498z"></path> </g> </g></svg>        <h3>Pure Grades</h3>-->
+<!--        <p>The coffee is brewed by first roasting the green coffee beans</p>-->
+<!--    </div>-->
+<!--    <div class="cool">-->
+<!--        <svg fill="#ffffff" width="100px" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M23 2C22.449219 2 22 2.449219 22 3L22 4C22 4.226563 22.078125 4.449219 22.21875 4.625L26 9.351563L26 11L8 11C7.449219 11 7 11.449219 7 12L7 47C7 47.550781 7.449219 48 8 48L39 48C39.550781 48 40 47.550781 40 47L40 33L42 33C42.550781 33 43 32.550781 43 32L43 26C43 25.449219 42.550781 25 42 25L28 25L28 22.261719L29.8125 19L34 19C34.15625 19 34.308594 18.964844 34.449219 18.894531L35.898438 18.167969C36.496094 18.5625 37.253906 18.609375 37.894531 18.289063L38.894531 17.789063C39.738281 17.382813 40.1875 16.445313 39.976563 15.53125C39.761719 14.621094 38.945313 13.976563 38.011719 13.984375C37.695313 13.988281 37.386719 14.066406 37.105469 14.210938L36.105469 14.710938C35.46875 15.03125 35.046875 15.667969 35.003906 16.378906L33.765625 17L30.921875 17L32.875 13.484375C32.957031 13.335938 33 13.171875 33 13L33 12L37 12C37.15625 12 37.308594 11.964844 37.449219 11.894531L38.90625 11.164063C39.234375 11.378906 39.613281 11.5 40 11.5C40.304688 11.5 40.609375 11.433594 40.894531 11.289063L41.894531 10.789063C42.882813 10.292969 43.28125 9.09375 42.789063 8.105469C42.292969 7.117188 41.089844 6.714844 40.105469 7.210938L39.105469 7.710938C38.445313 8.042969 38.054688 8.6875 38.011719 9.375L36.765625 10L33 10L33 9.351563L36.78125 4.625C36.921875 4.449219 37 4.226563 37 4L37 3C37 2.449219 36.550781 2 36 2 Z M 24.28125 4L34.71875 4L31.519531 8L27.480469 8 Z M 28 10L31 10L31 10.832031C30.980469 10.941406 30.980469 11.050781 31 11.15625L31 12.738281L28 18.140625 Z M 9 13L26 13L26 25.832031C25.980469 25.941406 25.980469 26.050781 26 26.15625L26 31.832031C25.949219 32.125 26.03125 32.425781 26.226563 32.652344C26.417969 32.875 26.703125 33.003906 27 33L38 33L38 46L9 46 Z M 13 27C12.449219 27 12 27.449219 12 28C12 28.550781 12.449219 29 13 29C13.550781 29 14 28.550781 14 28C14 27.449219 13.550781 27 13 27 Z M 16 27C15.449219 27 15 27.449219 15 28C15 28.550781 15.449219 29 16 29C16.550781 29 17 28.550781 17 28C17 27.449219 16.550781 27 16 27 Z M 19 27C18.449219 27 18 27.449219 18 28C18 28.550781 18.449219 29 19 29C19.550781 29 20 28.550781 20 28C20 27.449219 19.550781 27 19 27 Z M 22 27C21.449219 27 21 27.449219 21 28C21 28.550781 21.449219 29 22 29C22.550781 29 23 28.550781 23 28C23 27.449219 22.550781 27 22 27 Z M 28 27L41 27L41 31L28 31 Z M 12 30L12 32L17 32L17 30 Z M 18 30L18 32L23 32L23 30 Z M 14 38C12.355469 38 11 39.355469 11 41C11 42.644531 12.355469 44 14 44C15.644531 44 17 42.644531 17 41C17 39.355469 15.644531 38 14 38 Z M 14 40C14.5625 40 15 40.4375 15 41C15 41.5625 14.5625 42 14 42C13.4375 42 13 41.5625 13 41C13 40.4375 13.4375 40 14 40Z"></path></g></svg>        <h3>Proper Roasting</h3>-->
+<!--        <p>The coffee is brewed by first roasting the green coffee beans</p>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<section id="about">-->
+<!--&lt;!&ndash;    <h2>Кофе</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;    <p>Напиток для любого настроения</p>&ndash;&gt;-->
+<!--    <video  width="100%" src="assets/coffee.mp4" autoplay muted loop></video>-->
+<!--</section>-->
+
+
+<!--&lt;!&ndash;<h1 class="title">Drinks</h1>&ndash;&gt;-->
+
+<!--<div class="block">-->
+<!--    <h1 class="title">COFFEE</h1>-->
+
+<!--<div class="drinks">-->
+<!--    <div class="drink" data-aos="fade-right" data-aos-duration="700">-->
+<!--        <img width="400px" src="https://static.vecteezy.com/system/resources/previews/009/887/182/non_2x/hot-coffee-latte-cup-free-png.png" alt="">-->
+<!--        <div class="info">-->
+<!--            <h3>Латте</h3>-->
+<!--            <p>Для тонких и чувственных натур. И для тех, кто любит творить</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="drink" data-aos="fade-left" data-aos-delay="300" data-aos-duration="800">-->
+<!--        <img width="400px" src="https://static.vecteezy.com/system/resources/previews/009/887/182/non_2x/hot-coffee-latte-cup-free-png.png" alt="">-->
+<!--        <div class="info">-->
+<!--            <h3>Латте</h3>-->
+<!--            <p>Для тонких и чувственных натур. И для тех, кто любит творить</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="drink" data-aos="fade-right" data-aos-delay="300" data-aos-duration="800">-->
+<!--        <img width="400px" src="https://static.vecteezy.com/system/resources/previews/009/887/182/non_2x/hot-coffee-latte-cup-free-png.png" alt="">-->
+<!--        <div class="info">-->
+<!--            <h3>Латте</h3>-->
+<!--            <p>Для тонких и чувственных натур. И для тех, кто любит творить</p>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="drink" data-aos="fade-left" data-aos-delay="300" data-aos-duration="800">-->
+<!--        <img width="400px" src="https://static.vecteezy.com/system/resources/previews/009/887/182/non_2x/hot-coffee-latte-cup-free-png.png" alt="">-->
+<!--        <div class="info">-->
+<!--            <h3>Латте</h3>-->
+<!--            <p>Для тонких и чувственных натур. И для тех, кто любит творить</p>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="drink" data-aos="fade-right" data-aos-delay="300" data-aos-duration="800">-->
+<!--        <img width="400px" src="https://static.vecteezy.com/system/resources/previews/009/887/182/non_2x/hot-coffee-latte-cup-free-png.png" alt="">-->
+<!--        <div class="info">-->
+<!--            <h3>Латте</h3>-->
+<!--            <p>Для тонких и чувственных натур. И для тех, кто любит творить</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    </div>-->
+
+</div>
+
+<script defer>
+    AOS.init();
+</script>
+</body>
+</html>

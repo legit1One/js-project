@@ -1,0 +1,148 @@
+* {
+    font-family: Roboto, sans-serif;
+}
+
+.todo-list {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.todo-list h3 {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 20px;
+    position: sticky;
+    top: 12px;
+    z-index: 5;
+    margin-bottom: 24px;
+}
+
+.todo-col {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px;
+    border-radius: 12px;
+    min-width: 300px;
+    padding-bottom: 12px;
+    align-items: center;
+}
+
+.todo-col--active {
+    background: #15803D;
+}
+
+.todo-col--finished {
+    background: #064E3B;
+}
+
+.todo-col--hold {
+    background: #F59E0B;
+}
+
+.todo-col--canceled {
+    background: #EF4444;
+}
+
+.todo-item {
+    background: white;
+    padding: 12px 8px;
+    border-radius: 8px;
+    font-weight: bold;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.todo-items {
+    width: 100%;
+    max-height: calc(100vh - 400px);
+    overflow: auto;
+}
+
+.todo-items::-webkit-scrollbar {
+    width: 0px;
+}
+
+.todo-item img {
+    cursor: pointer;
+    opacity: 0;
+    transition: .1s ease-in-out all;
+}
+
+.todo-item:hover img {
+    opacity: 1;
+}
+
+.todo-item input {
+    height: 32px;
+    outline: none;
+    border-radius: 4px;
+    border: 2px solid #1D4ED8;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.todo-add {
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: rgba(255, 255, 255, .4);
+    transition: .2s ease-in-out all;
+    margin-bottom: 8px;
+}
+
+.todo-add:hover {
+    background: rgba(255, 255, 255, .7);
+}
+
+.form {
+    margin: auto;
+    width: fit-content;
+    background: #1E3A8A;
+    padding: 24px 20px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.form__name {
+    height: 40px;
+    border-radius: 8px;
+    outline: none;
+    border: 1px solid #cecece;
+    font-size: 16px;
+}
+
+.form__head {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.form__head button {
+    background: white;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    font-family: Roboto;
+    width: 100%;
+    max-width: 120px;
+    cursor: pointer;
+}
+
+.form__head input {
+    width: 100%;
+    padding: 0 12px;
+}
+
+.form {
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 40px;
+}
+
+body {
+    background: #ECFCCB ;
+}
