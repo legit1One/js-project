@@ -2,18 +2,18 @@
 // //     method: 'DELETE'
 // // })
 //
-// axios.get('http://localhost:3000/posts')
+// axios.get('https://spiced-sustaining-pilot.glitch.me/posts')
 //     .then(response => {
 //         console.log(response.data)
 //     })
 //
-// axios.post('http://localhost:3000/posts', {
+// axios.post('https://spiced-sustaining-pilot.glitch.me/posts', {
 //     body: 'Baha',
 //     title: 'Hot',
 // })
 //
 // const loadPosts = async (search = '') => {
-//     const {data} = await axios.get('http://localhost:3000/posts')
+//     const {data} = await axios.get('https://spiced-sustaining-pilot.glitch.me/posts')
 //     const list = document.querySelector('.posts')
 //     list.innerHTML = ''
 //     data.forEach(({title}) => {
@@ -36,7 +36,7 @@
 
 const statuses = ['active', 'finished', 'hold', 'canceled']
 const loadPosts = async (search = '') => {
-    const {data} = await axios.get('http://localhost:3000/todo')
+    const {data} = await axios.get('https://spiced-sustaining-pilot.glitch.me/todo')
     data.forEach(({ title, status, id }) => {
         if(!statuses.includes(status)) return
         const list = document.querySelector(`.todo-col--${status} .todo-items`)
@@ -52,7 +52,7 @@ const loadPosts = async (search = '') => {
         list.appendChild(item)
 
         remove.addEventListener('click', async () => {
-            await axios.delete(`http://localhost:3000/todo/${id}`)
+            await axios.delete(`https://spiced-sustaining-pilot.glitch.me/todo/${id}`)
             item.remove()
         })
 
@@ -70,7 +70,7 @@ const loadPosts = async (search = '') => {
 
             input.addEventListener('keypress', async (e) => {
                 if(e.code === 'Enter') {
-                    const {data} = await axios.put(`http://localhost:3000/todo/${id}`, {
+                    const {data} = await axios.put(`https://spiced-sustaining-pilot.glitch.me/todo/${id}`, {
                         title: input.value,
                         status,
                         id
@@ -79,7 +79,7 @@ const loadPosts = async (search = '') => {
                     text.innerText = data.title
                 }
             })
-            // await axios.delete(`http://localhost:3000/todo/${id}`)
+            // await axios.delete(`https://spiced-sustaining-pilot.glitch.me/todo/${id}`)
             // item.remove()
         })
     })
@@ -97,7 +97,7 @@ document.querySelector('.form__head button').addEventListener('click', async () 
 
     radios.forEach(async (radio) => {
         if(radio.checked) {
-            await axios.post(`http://localhost:3000/todo`, {
+            await axios.post(`https://spiced-sustaining-pilot.glitch.me/todo`, {
                 title: input.value,
                 status: radio.id,
             })
@@ -105,17 +105,17 @@ document.querySelector('.form__head button').addEventListener('click', async () 
         }
     })
     console.dir(radios)
-    // const { data } = await axios.post(`http://localhost:3000/todo`, {
+    // const { data } = await axios.post(`https://spiced-sustaining-pilot.glitch.me/todo`, {
     //     title: input.value,
     //     status,
     //     id
     // })
 })
-// // axios.post('http://localhost:3000/posts', {
+// // axios.post('https://spiced-sustaining-pilot.glitch.me/posts', {
 // //     name: 'AXIOS'
 // // })
 //
-// // axios.delete('http://localhost:3000/posts/d349')
+// // axios.delete('https://spiced-sustaining-pilot.glitch.me/posts/d349')
 //
 // const student = {
 //     name: 'Baha',
