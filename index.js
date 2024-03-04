@@ -1,42 +1,17 @@
-// // fetch('https://jsonplaceholder.typicode.com/posts/1', {
-// //     method: 'DELETE'
-// // })
-//
-// axios.get('http://localhost:3000/posts')
-//     .then(response => {
-//         console.log(response.data)
-//     })
-//
-// axios.post('http://localhost:3000/posts', {
-//     body: 'Baha',
-//     title: 'Hot',
-// })
-//
-// const loadPosts = async (search = '') => {
-//     const {data} = await axios.get('http://localhost:3000/posts')
-//     const list = document.querySelector('.posts')
-//     list.innerHTML = ''
-//     data.forEach(({title}) => {
-//         if(title.toUpperCase().includes(search.toUpperCase())) {
-//             const li = document.createElement('li')
-//             li.innerText = title
-//             list.appendChild(li)
-//         }
-//     })
-// }
-//
-// loadPosts()
-//
-// const button = document.querySelector('#btn')
-// const input = document.querySelector('input')
-//
-// button.addEventListener('click', () => {
-//     loadPosts(input.value)
-// })
-
 const statuses = ['active', 'finished', 'hold', 'canceled']
+let todos = []
+const toggleLoader = () => {
+    const loader = document.querySelector('.loader')
+    loader.style.display = ['none', ''].includes(loader.style.display) ? 'flex' : 'none'
+}
+
 const loadPosts = async (search = '') => {
-    const {data} = await axios.get('http://localhost:3000/todo')
+    toggleLoader()
+    const {data} = await axios.get('https://spiced-sustaining-pilot.glitch.me/todo')
+    todos = data
+    toggleLoader()
+    const lists = document.querySelectorAll('.todo-items')
+    lists.forEach(list => { list.innerHTML = '' })
     data.forEach(({ title, status, id }) => {
         if(!statuses.includes(status)) return
         const list = document.querySelector(`.todo-col--${status} .todo-items`)
@@ -46,14 +21,17 @@ const loadPosts = async (search = '') => {
         remove.src = './assets/trash.svg'
 
         item.classList.add('todo-item')
+        item.dataset.todoId = id
         text.innerText = title
         item.appendChild(text)
         item.appendChild(remove)
         list.appendChild(item)
 
         remove.addEventListener('click', async () => {
-            await axios.delete(`http://localhost:3000/todo/${id}`)
+            toggleLoader()
+            await axios.delete(`https://spiced-sustaining-pilot.glitch.me/todo/${id}`)
             item.remove()
+            toggleLoader()
         })
 
         text.addEventListener('dblclick', async () => {
@@ -70,16 +48,18 @@ const loadPosts = async (search = '') => {
 
             input.addEventListener('keypress', async (e) => {
                 if(e.code === 'Enter') {
-                    const {data} = await axios.put(`http://localhost:3000/todo/${id}`, {
+                    toggleLoader()
+                    const {data} = await axios.put(`https://spiced-sustaining-pilot.glitch.me/todo/${id}`, {
                         title: input.value,
                         status,
                         id
                     })
                     input.blur()
                     text.innerText = data.title
+                    toggleLoader()
                 }
             })
-            // await axios.delete(`http://localhost:3000/todo/${id}`)
+            // await axios.delete(`https://spiced-sustaining-pilot.glitch.me/todo/${id}`)
             // item.remove()
         })
     })
@@ -97,45 +77,33 @@ document.querySelector('.form__head button').addEventListener('click', async () 
 
     radios.forEach(async (radio) => {
         if(radio.checked) {
-            await axios.post(`http://localhost:3000/todo`, {
+            await axios.post(`https://spiced-sustaining-pilot.glitch.me/todo`, {
                 title: input.value,
                 status: radio.id,
             })
             loadPosts()
         }
     })
-    console.dir(radios)
-    // const { data } = await axios.post(`http://localhost:3000/todo`, {
-    //     title: input.value,
-    //     status,
-    //     id
-    // })
 })
-// // axios.post('http://localhost:3000/posts', {
-// //     name: 'AXIOS'
-// // })
-//
-// // axios.delete('http://localhost:3000/posts/d349')
-//
-// const student = {
-//     name: 'Baha',
-//     age: 19,
-//     getSurname: () => 'Hot'
-// }
-//
-// const studentJson = JSON.stringify(student)
-//
-// const studentCopy = JSON.parse(studentJson)
-//
-// studentCopy.name = 'Skye'
-//
-// console.log(studentCopy)
-// console.log(student)
-// // console.log(studentJson)
-// // console.log(JSON.parse(studentJson))
-//
-// const printGreeting = () => {
-//     return 'Hello World'
-// }
-//
-// console.log(printGreeting())
+
+
+$( function() {
+    $( ".todo-items" ).sortable({
+        connectWith: ".todo-items",
+        items: ".todo-item",
+        stop: async function (container, data) {
+            const todoId = data.item[0].dataset.todoId
+            const status = container.toElement.parentNode.dataset.status
+            if(todos.some(todo => todo.id === todoId && todo.status === status)) {
+                return
+            }
+            toggleLoader()
+            todos.find(todo => todo.id === todoId).status = status
+            await axios.put(`https://spiced-sustaining-pilot.glitch.me/todo/${todoId}`, {
+                status,
+                title: data.item[0].firstChild.innerText
+            })
+            toggleLoader()
+        },
+    }).disableSelection();
+} );

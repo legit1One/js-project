@@ -1,8 +1,6 @@
 {
-  "scripts": {
-    "start": "npx json-server db.json"
-  },
   "dependencies": {
+    "@yuva1422/telegram.js": "^1.0.5",
     "json-server": "^1.0.0-alpha.23"
   }
 }

@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="last-lesson.js" defer></script>
+<!--    <script src="last-lesson.js" defer></script>-->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap')
     </style>
@@ -13,24 +13,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/plugins.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.6.0/Sortable.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<!--    <script src="index.js" defer></script>-->
+    <script src="index.js" type="module" defer></script>
     <link rel="stylesheet" href="project.css">
 <!--    <link rel="stylesheet" href="index.css">-->
     <title>Запросы</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="https://unpkg.com/imask"></script>
+
 </head>
 <body>
-<!--<input type="text" id="input">-->
-<!--<button id="clicker">Click me</button>-->
-
-<span id="number"></span>
-<button id="increment">+</button>
-
-
-
 <div class="form">
     <div class="form__head">
         <input type="text" class="form__name" placeholder="Название">
@@ -52,20 +53,24 @@
 <div class="todo-list">
     <div class="todo-col todo-col--active">
         <h3>Active</h3>
-        <div class="todo-items"></div>
+        <div class="todo-items" data-status="active"></div>
     </div>
     <div class="todo-col todo-col--hold">
         <h3>On Hold</h3>
-        <div class="todo-items"></div>
+        <div class="todo-items" data-status="hold"></div>
     </div>
     <div class="todo-col todo-col--finished">
         <h3>Finished</h3>
-        <div class="todo-items"></div>
+        <div class="todo-items" data-status="finished"></div>
     </div>
     <div class="todo-col todo-col--canceled">
         <h3>Canceled</h3>
-        <div class="todo-items"></div>
+        <div class="todo-items" data-status="canceled"></div>
     </div>
+</div>
+
+<div class="loader">
+    <svg fill="#ffffff" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M8,1V2.8A5.2,5.2,0,1,1,2.8,8H1A7,7,0,1,0,8,1Z"></path> </g> </g></svg>
 </div>
 
 <!--<input type="text" placeholder="Поиск по названию">-->
